@@ -29,8 +29,7 @@ jobs:
           goversion: "1.22"
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          project_path: './cmd/lsp'
-          binary_name: "emojilsp"
+          binary_name: "emoji-lsp"
           ldflags: "-s -w"
           extra_files: LICENSE
 

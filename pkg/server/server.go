@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"github.com/opa-oz/emoji-lsp/pkg/handlers"
@@ -9,16 +9,17 @@ import (
 	"github.com/tliron/glsp/server"
 )
 
-const lsName = "Emoji LSP"
-
 var (
-	version string = "0.0.2"
+	lsName  string
+	version string
 	handler protocol.Handler
 )
 
-func main() {
+func SpinUp(name, ver string, verbosity int, debug bool) {
+	lsName = name
+	ver = version
 	// This increases logging verbosity (optional)
-	commonlog.Configure(1, nil)
+	commonlog.Configure(verbosity, nil)
 
 	handler = protocol.Handler{
 		Initialize:             initialize,
@@ -29,7 +30,7 @@ func main() {
 		TextDocumentDidSave:    handlers.TextDocumentDidSave,
 	}
 
-	server := server.NewServer(&handler, lsName, true)
+	server := server.NewServer(&handler, lsName, debug)
 
 	server.RunStdio()
 }
